@@ -6,38 +6,38 @@ using System.Web.UI.WebControls;
 
 public partial class Admin : System.Web.UI.Page
 {
-    //protected void Page_Load(object sender, EventArgs e)
-    //{
-    //    try
-    //    {
-    //        if (Session["usertype"].Equals("Teachers") == true)
-    //        {
-    //            Response.Redirect("Teacher.aspx");
-    //        }
-    //        else if(Session["usertype"].Equals("Students") == true)
-    //        {
-    //            Response.Redirect("Studnet.aspx");
-    //        }
-    //        else if (Session["usertype"].Equals("Admin") == false)
-    //        {
-    //            Response.Redirect("Login.aspx");
-    //        }
-    //    }
-    //    catch (System.NullReferenceException)
-    //    {
-    //        Response.Redirect("Login.aspx");
-    //    }
-    //
-    //    if (!Page.IsPostBack)
-    //    {
-    //        BindGridView();
-    //    }
-    //}
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        //try
+        //{
+        //    if (Session["usertype"].Equals("Teachers") == true)
+        //    {
+        //        Response.Redirect("Teacher.aspx");
+        //    }
+        //    else if(Session["usertype"].Equals("Students") == true)
+        //    {
+        //        Response.Redirect("Studnet.aspx");
+        //    }
+        //    else if (Session["usertype"].Equals("Admin") == false)
+        //    {
+        //        Response.Redirect("Login.aspx");
+        //    }
+        //}
+        //catch (System.NullReferenceException)
+        //{
+        //    Response.Redirect("Login.aspx");
+        //}
+        //
+        //if (!Page.IsPostBack)
+        //{
+            BindGridView();
+        //}
+    }
 
     private void DeleteRecord(string cno)
     {
         SqlConnection connection = new SqlConnection(GetConnectionString());
-        string sqlStatement = "DELETE FROM Course WHERE cno = @cno";
+        string sqlStatement = "DELETE FROM zhusu WHERE sno = @sno";
 
         try
         {
@@ -66,7 +66,7 @@ public partial class Admin : System.Web.UI.Page
         try
         {
             connection.Open();
-            string sqlStatement = "SELECT * FROM Course";
+            string sqlStatement = "SELECT zhusu.s_no,zhusu.room_no,rest_money,s_name FROM zhusu,student,bedroom WHERE zhusu.s_no = student.s_no AND zhusu.room_no = bedroom.room_no";
             SqlCommand sqlCmd = new SqlCommand(sqlStatement, connection);
             SqlDataAdapter sqlDa = new SqlDataAdapter(sqlCmd);
             sqlDa.Fill(dt);
@@ -92,7 +92,7 @@ public partial class Admin : System.Web.UI.Page
     {
         //Where MyConsString is the connetion string that was set up in the web config file
         //return System.Configuration.ConfigurationManager.ConnectionStrings["MyConsString"].ConnectionString;
-        string connstr = "Data Source=EVENTHOUGH;Initial Catalog=ClassManagement;Integrated Security=True;Pooling=False";
+        string connstr = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dormitory_management.mdf;Integrated Security=True";
         return connstr;
     }
 
@@ -208,9 +208,4 @@ public partial class Admin : System.Web.UI.Page
 
     }
 
-    protected void Button_Singout_Click(object sender, EventArgs e)
-    {
-        Session.Clear();
-        Response.Redirect("Login.aspx");
-    }
 }
