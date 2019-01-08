@@ -34,16 +34,16 @@ public partial class Admin : System.Web.UI.Page
         //}
     }
 
-    private void DeleteRecord(string cno)
+    private void DeleteRecord(string sno)
     {
         SqlConnection connection = new SqlConnection(GetConnectionString());
-        string sqlStatement = "DELETE FROM zhusu WHERE sno = @sno";
+        string sqlStatement = "DELETE FROM zhusu WHERE s_no = @sno";
 
         try
         {
             connection.Open();
             SqlCommand cmd = new SqlCommand(sqlStatement, connection);
-            cmd.Parameters.AddWithValue("@cno", cno);
+            cmd.Parameters.AddWithValue("@sno", sno);
             cmd.CommandType = CommandType.Text;
             cmd.ExecuteNonQuery();
         }
@@ -96,21 +96,21 @@ public partial class Admin : System.Web.UI.Page
         return connstr;
     }
 
-    private void AddNewRecord(string cno, string cname, string cmax, string cleft)
+    private void AddNewRecord(string roomno, string sno, string sname, string restmoney)
     {
         SqlConnection connection = new SqlConnection(GetConnectionString());
-        string sqlStatement = "INSERT INTO Course" +
-                              "(cno,cname,cmax,cleft)" +
-                               "VALUES (@cno,@cname,@cmax,@cleft)";
+        string sqlStatement = "INSERT INTO zhusu" +
+                              "(room_no,s_no,sname,restmoney)" +
+                               "VALUES (@roomno,@sno,@sname,@restmoney)";
         try
         {
 
             connection.Open();
             SqlCommand cmd = new SqlCommand(sqlStatement, connection);
-            cmd.Parameters.AddWithValue("@cno", cno);
-            cmd.Parameters.AddWithValue("@cname", cname);
-            cmd.Parameters.AddWithValue("@cmax", cmax);
-            cmd.Parameters.AddWithValue("@cleft", cleft);
+            cmd.Parameters.AddWithValue("@roomno", roomno);
+            cmd.Parameters.AddWithValue("@sno", sno);
+            cmd.Parameters.AddWithValue("@sname", sname);
+            cmd.Parameters.AddWithValue("@restmoney", restmoney);
             cmd.CommandType = CommandType.Text;
             cmd.ExecuteNonQuery();
         }
@@ -128,31 +128,30 @@ public partial class Admin : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        TextBox tbcno = (TextBox)GridView1.FooterRow.Cells[1].FindControl("TextBoxcno");
-        TextBox tbcname = (TextBox)GridView1.FooterRow.Cells[2].FindControl("TextBoxcname");
-        TextBox tbcmax = (TextBox)GridView1.FooterRow.Cells[3].FindControl("TextBoxcmax");
-        TextBox tbcleft = (TextBox)GridView1.FooterRow.Cells[4].FindControl("TextBoxcleft");
-        if ((tbcno.Text.Trim() != "") && (tbcname.Text.Trim() != "") && (tbcmax.Text.Trim() != "") && (tbcleft.Text.Trim() != ""))
+        TextBox tbroomno = (TextBox)GridView1.FooterRow.Cells[1].FindControl("TextBoxroomno");
+        TextBox tbsno = (TextBox)GridView1.FooterRow.Cells[2].FindControl("TextBoxsno");
+        TextBox tbsname = (TextBox)GridView1.FooterRow.Cells[3].FindControl("TextBoxsname");
+        TextBox tbrestmoney = (TextBox)GridView1.FooterRow.Cells[4].FindControl("TextBoxrestmoney");
+        if ((tbroomno.Text.Trim() != "") && (tbsno.Text.Trim() != "") && (tbsname.Text.Trim() != "") && (tbrestmoney.Text.Trim() != ""))
         {
-            AddNewRecord(tbcno.Text,tbcname.Text,tbcmax.Text,tbcleft.Text);
+            AddNewRecord(tbroomno.Text, tbsno.Text, tbsname.Text, tbrestmoney.Text);
             BindGridView();
         }
     }
 
-    private void UpdateRecord(string cno, string cname, string cmax, string cleft)
+    private void UpdateRecord(string roomno, string sno)
     {
         SqlConnection connection = new SqlConnection(GetConnectionString());
-        string sqlStatement = "UPDATE Course " +
-                              "SET cno = cno, cname = @cname, cmax= @cmax, cleft= @cleft " +
-                              "WHERE cno = @cno";
+        string sqlStatement = "UPDATE zhusu " +
+                              "SET room_no = '" + roomno + "', s_no = '" +sno +"' " +"WHERE s_no = '" +sno +"'";
         try
         {
             connection.Open();
             SqlCommand cmd = new SqlCommand(sqlStatement, connection);
-            cmd.Parameters.AddWithValue("@cno", cno);
-            cmd.Parameters.AddWithValue("@cname", cname);
-            cmd.Parameters.AddWithValue("@cmax", cmax);
-            cmd.Parameters.AddWithValue("@cleft", cleft);
+            //cmd.Parameters.AddWithValue("@roomno", roomno);
+            //cmd.Parameters.AddWithValue("@sno", sno);
+            //cmd.Parameters.AddWithValue("@sname", sname);
+            //cmd.Parameters.AddWithValue("@restmoney", restmoney);
             cmd.CommandType = CommandType.Text;
             cmd.ExecuteNonQuery();
         }
@@ -183,12 +182,12 @@ public partial class Admin : System.Web.UI.Page
     protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
     {
         //Accessing Edited values from the GridView
-        string cno = ((TextBox)GridView1.Rows[e.RowIndex].Cells[0].FindControl("TextBoxEditcno")).Text;
-        string cname = ((TextBox)GridView1.Rows[e.RowIndex].Cells[1].FindControl("TextBoxEditcname")).Text;
-        string cmax = ((TextBox)GridView1.Rows[e.RowIndex].Cells[2].FindControl("TextBoxEditcmax")).Text;
-        string cleft = ((TextBox)GridView1.Rows[e.RowIndex].Cells[3].FindControl("TextBoxEditcleft")).Text;
-
-        UpdateRecord(cno,cname, cmax, cleft); // call update method
+        string roomno =((TextBox)GridView1.Rows[e.RowIndex].Cells[0].FindControl("TextBoxEditroomno")).Text;
+        string sno = ((TextBox)GridView1.Rows[e.RowIndex].Cells[1].FindControl("TextBoxEditsno")).Text;
+        //string sname = ((TextBox)GridView1.Rows[e.RowIndex].Cells[2].FindControl("TextBoxEditsname")).Text;
+        //string restmoney = ((TextBox)GridView1.Rows[e.RowIndex].Cells[3].FindControl("TextBoxEditrestmoney")).Text;
+                 
+        UpdateRecord(roomno, sno); // call update method
 
         GridView1.EditIndex = -1; //Turn the Grid to read only mode
 
@@ -197,12 +196,11 @@ public partial class Admin : System.Web.UI.Page
 
     }
 
-
     protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         //get the ID of the selected row
-        string cno = ((Label)GridView1.Rows[e.RowIndex].Cells[0].FindControl("Labelcno")).Text;
-        DeleteRecord(cno); //call the method for delete
+        string sno = ((Label)GridView1.Rows[e.RowIndex].Cells[0].FindControl("Labelsno")).Text;
+        DeleteRecord(sno); //call the method for delete
 
         BindGridView(); // Rebind GridView to reflect changes made
 

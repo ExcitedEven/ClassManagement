@@ -24,7 +24,7 @@
     <script src="/demos/googlegg.js"></script>
 
     <form id="form1" runat="server">
-        <div class="index-page">
+        <div class="index-page" style="height:100%">
             <div class="solution-more">
                 <div class="solution-more-slide">
                     <div class="container">
