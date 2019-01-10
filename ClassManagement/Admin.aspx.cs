@@ -357,4 +357,10 @@ public partial class Admin : System.Web.UI.Page
 
     }
 
+
+    protected void Button3_Click(object sender, EventArgs e)
+    {
+        Session.Clear();
+        Response.Redirect("Index.aspx");
+    }
 }

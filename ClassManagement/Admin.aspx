@@ -193,6 +193,7 @@
             });
 	//hover
         </script>
+        <asp:Button ID="Button3" runat="server" Text="退出" OnClick="Button3_Click" />
     </form>
 
 </body>
