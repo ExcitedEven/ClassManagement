@@ -80,4 +80,9 @@ public partial class CleanTime : System.Web.UI.Page
             }
         }
     }
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Index.aspx");
+    }
 }

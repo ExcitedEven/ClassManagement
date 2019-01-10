@@ -24,7 +24,7 @@
     <script src="/demos/googlegg.js"></script>
 
     <form id="form1" runat="server">
-        <div class="index-page" style="height:100%">
+        <div class="index-page" style="height: 100%">
             <div class="solution-more">
                 <div class="solution-more-slide">
                     <div class="container">
@@ -53,6 +53,7 @@
                             <li class="item-1" style="position: absolute; width: 1920px; left: 0px; top: 0px; display: list-item;">
                                 <div class="container">
                                     <div class="inner">
+
                                         <div align="center">
                                             <asp:GridView ID="GridView1" runat="server"
                                                 BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px"
@@ -61,7 +62,9 @@
                                                 OnRowCancelingEdit="GridView1_RowCancelingEdit"
                                                 OnRowEditing="GridView1_RowEditing"
                                                 OnRowUpdating="GridView1_RowUpdating"
-                                                OnRowDeleting="GridView1_RowDeleting" CssClass="auto-style1" EnableModelValidation="True" ForeColor="Black" GridLines="Horizontal">
+                                                OnRowDeleting="GridView1_RowDeleting"
+                                                CssClass="auto-style1"
+                                                EnableModelValidation="True" ForeColor="Black" GridLines="Horizontal">
                                                 <Columns>
                                                     <asp:TemplateField HeaderText="寝室号">
                                                         <EditItemTemplate>
@@ -74,7 +77,7 @@
                                                             <asp:TextBox ID="TextBoxroomno" runat="server" />
                                                         </FooterTemplate>
                                                     </asp:TemplateField>
-                                        
+
                                                     <asp:TemplateField HeaderText="学号">
                                                         <EditItemTemplate>
                                                             <asp:TextBox ID="TextBoxEditsno" runat="server" Text='<%# Bind("s_no") %>' />
@@ -86,19 +89,13 @@
                                                             <asp:TextBox ID="TextBoxsno" runat="server" />
                                                         </FooterTemplate>
                                                     </asp:TemplateField>
-                                        
+
                                                     <asp:TemplateField HeaderText="学生姓名">
-                                                        <EditItemTemplate>
-                                                            <asp:TextBox ID="TextBoxEditsname" runat="server" Text='<%# Bind("s_name") %>' />
-                                                        </EditItemTemplate>
                                                         <ItemTemplate>
                                                             <asp:Label ID="Labelsname" runat="server" Text='<%# Bind("s_name") %>' />
                                                         </ItemTemplate>
-                                                        <FooterTemplate>
-                                                            <asp:TextBox ID="TextBoxsname" runat="server" />
-                                                        </FooterTemplate>
                                                     </asp:TemplateField>
-                                        
+
                                                     <asp:TemplateField HeaderText="电费">
                                                         <EditItemTemplate>
                                                             <asp:TextBox ID="TextBoxEditrestmoney" runat="server" Text='<%# Bind("rest_money") %>' />
@@ -106,9 +103,6 @@
                                                         <ItemTemplate>
                                                             <asp:Label ID="Labelrestmoney" runat="server" Text='<%# Bind("rest_money") %>' />
                                                         </ItemTemplate>
-                                                        <FooterTemplate>
-                                                            <asp:TextBox ID="TextBoxrestmoney" runat="server" />
-                                                        </FooterTemplate>
                                                     </asp:TemplateField>
                                                     <asp:CommandField ShowEditButton="True" ShowDeleteButton HeaderText="操作" />
                                                 </Columns>
@@ -116,10 +110,11 @@
                                                 <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
                                                 <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
                                                 <SelectedRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White" />
-                                        
+
                                             </asp:GridView>
                                             <asp:Button ID="Button1" Width="30%" runat="server" Style="color: black" Text="增  加" OnClick="Button1_Click" />
                                         </div>
+
                                     </div>
                                 </div>
                             </li>
@@ -127,7 +122,61 @@
                             <li class="item-2" style="position: absolute; width: 1920px; left: 0px; top: 0px; display: none;">
                                 <div class="container">
                                     <div class="inner">
+
+                                        <div align="center">
+                                            <asp:GridView ID="GridView2" runat="server"
+                                                BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px"
+                                                CellPadding="4" PageSize="1" AutoGenerateColumns="False"
+                                                ShowFooter="True"
+                                                OnRowCancelingEdit="GridView2_RowCancelingEdit"
+                                                OnRowEditing="GridView2_RowEditing"
+                                                OnRowUpdating="GridView2_RowUpdating"
+                                                OnRowDeleting="GridView2_RowDeleting"
+                                                CssClass="auto-style1"
+                                                EnableModelValidation="True" ForeColor="Black" GridLines="Horizontal">
+                                                <Columns>
+                                                    <asp:TemplateField HeaderText="时间">
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="TextBoxEditdutytime" runat="server" Text='<%# Bind("dutytime") %>' />
+                                                        </EditItemTemplate>
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="Labeldutytime" runat="server" Text='<%# Bind("dutytime") %>' />
+                                                        </ItemTemplate>
+                                                        <FooterTemplate>
+                                                            <asp:TextBox ID="TextBoxdutytime" runat="server" />
+                                                        </FooterTemplate>
+                                                    </asp:TemplateField>
+
+                                                    <asp:TemplateField HeaderText="职工编号">
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="TextBoxEditcleanerno" runat="server" Text='<%# Bind("cleaner_no") %>' />
+                                                        </EditItemTemplate>
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="Labelcleanerno" runat="server" Text='<%# Bind("cleaner_no") %>' />
+                                                        </ItemTemplate>
+                                                        <FooterTemplate>
+                                                            <asp:TextBox ID="TextBoxcleanerno" runat="server" />
+                                                        </FooterTemplate>
+                                                    </asp:TemplateField>
+
+                                                    <asp:TemplateField HeaderText="职工姓名">
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="Labelcleanername" runat="server" Text='<%# Bind("cleaner_name") %>' />
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+
+                                                    <asp:CommandField ShowEditButton="True" ShowDeleteButton HeaderText="操作" />
+                                                </Columns>
+                                                <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
+                                                <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
+                                                <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
+                                                <SelectedRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White" />
+
+                                            </asp:GridView>
+                                            <asp:Button ID="Button2" Width="30%" runat="server" Style="color: black" Text="增  加" OnClick="Button2_Click" />
+                                        </div>
                                     </div>
+
                                 </div>
                             </li>
                         </ul>

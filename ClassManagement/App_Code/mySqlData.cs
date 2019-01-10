@@ -16,12 +16,12 @@ public class mySqlData
         //
     }
 
-    public String MyRead(String usertype,String userID,String SQL)
+    public String MyRead(String userID,String SQL)
     {
 
         SqlDataReader dr;
         SqlConnection conn = new SqlConnection();
-        conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ClassManagementConnectionString"].ConnectionString;
+        conn.ConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["DormitoryManagementConnectionString"].ConnectionString;
         SqlCommand cmd = new SqlCommand();
         cmd.Connection = conn;
         cmd.CommandType = System.Data.CommandType.Text;

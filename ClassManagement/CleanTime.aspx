@@ -53,6 +53,7 @@
             </table>
         </div>
         <asp:SqlDataSource ID="SqlDataSource_cleaner" runat="server" ConnectionString="<%$ ConnectionStrings:dormitorymanagementConnectionString %>" SelectCommand="SELECT cleaner.cleaner_no, cleaner.cleaner_name, on_duty.dutytime FROM on_duty INNER JOIN cleaner ON on_duty.cleaner_no = cleaner.cleaner_no"></asp:SqlDataSource>
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="返回" />
     </form>
 </body>
 </html>
